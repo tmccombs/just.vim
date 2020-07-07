@@ -28,7 +28,9 @@ syn match justDependency "\h\k*" contained
 " Identifiers
 syn match justModifier "^\%(alias\|export\)" nextgroup=justIdent skipwhite
 syn match justIdent "\<\h\k*\s*:=.*$" contains=@justExpr,@justAssign
-syn match justSetting "^set \+shell\s\+:=.*$" contains=@justStr
+syn region justSetting start="^set " end="$" oneline contains=justAssign,justSettingName,justArray
+syn keyword justSettingName shell contained
+syn region justArray start="\[" end="\]" oneline contained contains=@justStr
 syn region justInterp start="{{" end="}}" contains=@justExpr contained
 
 syn cluster justExpr contains=@justStr,justOperator,justCmdInterp,justFunc,justParen
@@ -53,6 +55,7 @@ syn region justStatement start="^\s" skip="\\$" end="$" end="#"me=e-1 contains=j
 
 " Define the default highlighiting.
 
+hi def link justArray       Operator
 hi def link justAssign      Operator
 hi def link justCmdInterp   Special
 hi def link justComment     Comment
@@ -69,6 +72,7 @@ hi def link justParen       Special
 hi def link justQuiet       Special
 hi def link justRawString   String
 hi def link justSetting     Define
+hi def link justSettingName Identifier
 hi def link justShebang     SpecialComment
 hi def link justStatement   Number
 hi def link justString      String
