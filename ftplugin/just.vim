@@ -6,4 +6,4 @@ let b:did_ftplugin = 1
 
 setlocal iskeyword=a-z,A-Z,48-57,_,-
 setlocal commentstring=#\ %s
-setlocal makeprg="just -f %"
+setlocal makeprg=just\ -f%
